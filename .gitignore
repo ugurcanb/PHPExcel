@@ -1,6 +1,9 @@
 build/PHPExcel.phar
 unitTests/codeCoverage
 analysis
+DS_Store
+vendor
+composer.lock
 
 ## IDE support
 *.buildpath
