@@ -134,7 +134,7 @@ class PHPExcel_IOFactory
         // Include class
         foreach (self::$searchLocations as $searchLocation) {
             if ($searchLocation['type'] == $searchType) {
-                $className = str_replace('{0}', $writerType, $searchLocation['class']);
+                $className = str_replace(['{0}', '[0]'], $writerType, $searchLocation['class']);
 
                 $instance = new $className($phpExcel);
                 if ($instance !== null) {
