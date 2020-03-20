@@ -10,7 +10,7 @@ if (!defined('PHPEXCEL_ROOT')) {
 }
 
 
-require_once PHPEXCEL_ROOT . 'PHPExcel/Shared/trend/trendClass.php';
+require_once PHPEXCEL_ROOT . 'PHPExcel/Shared/Trend/TrendClass.php';
 
 
 /** LOG_GAMMA_X_MAX_VALUE */
@@ -1176,7 +1176,7 @@ class PHPExcel_Calculation_Statistical
             return PHPExcel_Calculation_Functions::DIV0();
         }
 
-        $bestFitLinear = trendClass::calculate(trendClass::TREND_LINEAR, $yValues, $xValues);
+        $bestFitLinear = TrendClass::calculate(TrendClass::TREND_LINEAR, $yValues, $xValues);
         return $bestFitLinear->getCorrelation();
     }
 
@@ -1334,7 +1334,7 @@ class PHPExcel_Calculation_Statistical
             return PHPExcel_Calculation_Functions::DIV0();
         }
 
-        $bestFitLinear = trendClass::calculate(trendClass::TREND_LINEAR, $yValues, $xValues);
+        $bestFitLinear = TrendClass::calculate(TrendClass::TREND_LINEAR, $yValues, $xValues);
         return $bestFitLinear->getCovariance();
     }
 
@@ -1620,7 +1620,7 @@ class PHPExcel_Calculation_Statistical
             return PHPExcel_Calculation_Functions::DIV0();
         }
 
-        $bestFitLinear = trendClass::calculate(trendClass::TREND_LINEAR, $yValues, $xValues);
+        $bestFitLinear = TrendClass::calculate(TrendClass::TREND_LINEAR, $yValues, $xValues);
         return $bestFitLinear->getValueOfYForX($xValue);
     }
 
@@ -1791,7 +1791,7 @@ class PHPExcel_Calculation_Statistical
         $newValues = PHPExcel_Calculation_Functions::flattenArray($newValues);
         $const = (is_null($const)) ? true : (boolean) PHPExcel_Calculation_Functions::flattenSingleValue($const);
 
-        $bestFitExponential = trendClass::calculate(trendClass::TREND_EXPONENTIAL, $yValues, $xValues, $const);
+        $bestFitExponential = TrendClass::calculate(TrendClass::TREND_EXPONENTIAL, $yValues, $xValues, $const);
         if (empty($newValues)) {
             $newValues = $bestFitExponential->getXValues();
         }
@@ -1915,7 +1915,7 @@ class PHPExcel_Calculation_Statistical
             return PHPExcel_Calculation_Functions::DIV0();
         }
 
-        $bestFitLinear = trendClass::calculate(trendClass::TREND_LINEAR, $yValues, $xValues);
+        $bestFitLinear = TrendClass::calculate(TrendClass::TREND_LINEAR, $yValues, $xValues);
         return $bestFitLinear->getIntersect();
     }
 
@@ -2037,7 +2037,7 @@ class PHPExcel_Calculation_Statistical
             return 0;
         }
 
-        $bestFitLinear = trendClass::calculate(trendClass::TREND_LINEAR, $yValues, $xValues, $const);
+        $bestFitLinear = TrendClass::calculate(TrendClass::TREND_LINEAR, $yValues, $xValues, $const);
         if ($stats) {
             return array(
                 array(
@@ -2103,7 +2103,7 @@ class PHPExcel_Calculation_Statistical
             return 1;
         }
 
-        $bestFitExponential = trendClass::calculate(trendClass::TREND_EXPONENTIAL, $yValues, $xValues, $const);
+        $bestFitExponential = TrendClass::calculate(TrendClass::TREND_EXPONENTIAL, $yValues, $xValues, $const);
         if ($stats) {
             return array(
                 array(
@@ -2928,7 +2928,7 @@ class PHPExcel_Calculation_Statistical
             return PHPExcel_Calculation_Functions::DIV0();
         }
 
-        $bestFitLinear = trendClass::calculate(trendClass::TREND_LINEAR, $yValues, $xValues);
+        $bestFitLinear = TrendClass::calculate(TrendClass::TREND_LINEAR, $yValues, $xValues);
         return $bestFitLinear->getGoodnessOfFit();
     }
 
@@ -2994,7 +2994,7 @@ class PHPExcel_Calculation_Statistical
             return PHPExcel_Calculation_Functions::DIV0();
         }
 
-        $bestFitLinear = trendClass::calculate(trendClass::TREND_LINEAR, $yValues, $xValues);
+        $bestFitLinear = TrendClass::calculate(TrendClass::TREND_LINEAR, $yValues, $xValues);
         return $bestFitLinear->getSlope();
     }
 
@@ -3287,7 +3287,7 @@ class PHPExcel_Calculation_Statistical
             return PHPExcel_Calculation_Functions::DIV0();
         }
 
-        $bestFitLinear = trendClass::calculate(trendClass::TREND_LINEAR, $yValues, $xValues);
+        $bestFitLinear = TrendClass::calculate(TrendClass::TREND_LINEAR, $yValues, $xValues);
         return $bestFitLinear->getStdevOfResiduals();
     }
 
@@ -3430,7 +3430,7 @@ class PHPExcel_Calculation_Statistical
         $newValues = PHPExcel_Calculation_Functions::flattenArray($newValues);
         $const = (is_null($const)) ? true : (boolean) PHPExcel_Calculation_Functions::flattenSingleValue($const);
 
-        $bestFitLinear = trendClass::calculate(trendClass::TREND_LINEAR, $yValues, $xValues, $const);
+        $bestFitLinear = TrendClass::calculate(TrendClass::TREND_LINEAR, $yValues, $xValues, $const);
         if (empty($newValues)) {
             $newValues = $bestFitLinear->getXValues();
         }
