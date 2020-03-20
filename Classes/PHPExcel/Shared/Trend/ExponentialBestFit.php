@@ -1,9 +1,6 @@
 <?php
-
-require_once(PHPEXCEL_ROOT . 'PHPExcel/Shared/Trend/BestFitClass.php');
-
 /**
- * PHPExcelLogarithmicBestFit
+ * ExponentialBestFit
  *
  * Copyright (c) 2006 - 2015 PHPExcel
  *
@@ -27,7 +24,7 @@ require_once(PHPEXCEL_ROOT . 'PHPExcel/Shared/Trend/BestFitClass.php');
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
  * @version    ##VERSION##, ##DATE##
  */
-class PHPExcelLogarithmicBestFit extends PHPExcelBestFit
+class ExponentialBestFit extends BestFit
 {
     /**
      * Algorithm type to use for best-fit
@@ -35,7 +32,7 @@ class PHPExcelLogarithmicBestFit extends PHPExcelBestFit
      *
      * @var    string
      **/
-    protected $bestFitType        = 'logarithmic';
+    protected $bestFitType        = 'exponential';
 
     /**
      * Return the Y-Value for a specified value of X
@@ -45,7 +42,7 @@ class PHPExcelLogarithmicBestFit extends PHPExcelBestFit
      **/
     public function getValueOfYForX($xValue)
     {
-        return $this->getIntersect() + $this->getSlope() * log($xValue - $this->xOffset);
+        return $this->getIntersect() * pow($this->getSlope(), ($xValue - $this->xOffset));
     }
 
     /**
@@ -56,7 +53,7 @@ class PHPExcelLogarithmicBestFit extends PHPExcelBestFit
      **/
     public function getValueOfXForY($yValue)
     {
-        return exp(($yValue - $this->getIntersect()) / $this->getSlope());
+        return log(($yValue + $this->yOffset) / $this->getIntersect()) / log($this->getSlope());
     }
 
     /**
@@ -70,7 +67,35 @@ class PHPExcelLogarithmicBestFit extends PHPExcelBestFit
         $slope = $this->getSlope($dp);
         $intersect = $this->getIntersect($dp);
 
-        return 'Y = '.$intersect.' + '.$slope.' * log(X)';
+        return 'Y = ' . $intersect . ' * ' . $slope . '^X';
+    }
+
+    /**
+     * Return the Slope of the line
+     *
+     * @param     int        $dp        Number of places of decimal precision to display
+     * @return     string
+     **/
+    public function getSlope($dp = 0)
+    {
+        if ($dp != 0) {
+            return round(exp($this->_slope), $dp);
+        }
+        return exp($this->_slope);
+    }
+
+    /**
+     * Return the Value of X where it intersects Y = 0
+     *
+     * @param     int        $dp        Number of places of decimal precision to display
+     * @return     string
+     **/
+    public function getIntersect($dp = 0)
+    {
+        if ($dp != 0) {
+            return round(exp($this->intersect), $dp);
+        }
+        return exp($this->intersect);
     }
 
     /**
@@ -80,9 +105,9 @@ class PHPExcelLogarithmicBestFit extends PHPExcelBestFit
      * @param     float[]    $xValues    The set of X-values for this regression
      * @param     boolean    $const
      */
-    private function logarithmicRegression($yValues, $xValues, $const)
+    private function exponentialRegression($yValues, $xValues, $const)
     {
-        foreach ($xValues as &$value) {
+        foreach ($yValues as &$value) {
             if ($value < 0.0) {
                 $value = 0 - log(abs($value));
             } elseif ($value > 0.0) {
@@ -104,7 +129,7 @@ class PHPExcelLogarithmicBestFit extends PHPExcelBestFit
     public function __construct($yValues, $xValues = array(), $const = true)
     {
         if (parent::__construct($yValues, $xValues) !== false) {
-            $this->logarithmicRegression($yValues, $xValues, $const);
+            $this->exponentialRegression($yValues, $xValues, $const);
         }
     }
 }

@@ -1,9 +1,6 @@
 <?php
-
-require_once(PHPEXCEL_ROOT . 'PHPExcel/Shared/Trend/BestFitClass.php');
-
 /**
- * PHPExcelLinearBestFit
+ * LinearBestFit
  *
  * Copyright (c) 2006 - 2015 PHPExcel
  *
@@ -27,7 +24,7 @@ require_once(PHPEXCEL_ROOT . 'PHPExcel/Shared/Trend/BestFitClass.php');
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
  * @version    ##VERSION##, ##DATE##
  */
-class PHPExcelLinearBestFit extends PHPExcelBestFit
+class LinearBestFit extends BestFit
 {
     /**
      * Algorithm type to use for best-fit
